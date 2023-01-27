@@ -14,4 +14,14 @@ function drawPacMan(posX, posY) {
     ctx.fill();
 }
 
+var borderLeftTop = 650;
+var borderRightBotton = 760;
+
+function drawArenaBorder(lT, rB) {
+    ctx.fillStyle = "blue";
+    ctx.fillRect(lT, 50, 500, rB);
+    ctx.clearRect(lT+5, 55, 489, rB-10);
+}
+
+drawArenaBorder(borderLeftTop, borderRightBotton);
 drawPacMan(posPacX, posPacY);
