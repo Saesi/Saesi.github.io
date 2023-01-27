@@ -39,7 +39,6 @@ function animate() {
     ctx.clearRect(0, 0, innerWidth, innerHeight);
     drawArenaBorder(borderLeftTop, borderRightBotton);
     drawPacMan(posPacX, posPacY, dir);
-    console.log(dir);
     document.onkeydown = function(event) {
         switch (event.keyCode) {
         case 37:
