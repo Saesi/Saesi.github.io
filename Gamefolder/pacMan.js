@@ -7,7 +7,7 @@ canvas.height = window.innerHeight;
 var posPacX = 900;
 var posPacY = 500;
 var dir = 1;
-function drawPacMan(posX, posY, direction) {
+function drawPacMan(posX, posY, direction) {    //Fall sem teiknar pacman
     ctx.beginPath();
     if (direction == 1){
         ctx.arc(posX, posY, 15, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
@@ -23,7 +23,7 @@ function drawPacMan(posX, posY, direction) {
     ctx.fill();
 }
 
-var borderLeftTop = 650;
+var borderLeftTop = 650;    //Hornin fyrir brautina
 var borderRightBotton = 760;
 
 function drawArenaBorder(lT, rB) {
@@ -34,7 +34,7 @@ function drawArenaBorder(lT, rB) {
 
 
 
-function animate() {
+function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, innerWidth, innerHeight);
     drawArenaBorder(borderLeftTop, borderRightBotton);
