@@ -11,8 +11,8 @@ class Pacman {
         this.x = x;
         this.y = y;
         this.velocity = velocity;
-        this.velocityX = this.velocity.x;
-        this.velocityY = this.velocity.y;
+        this.velocityX = 0;
+        this.velocityY = 0;
         this.lastDir = 0;
 
         window.addEventListener('keydown', (e) => {
@@ -27,6 +27,20 @@ class Pacman {
             }
             if (e.key == "s") {
                 this.velocityY = this.velocity.y;
+            }
+        });
+        window.addEventListener('keyup', (e) => {
+            if (e.key == "a") {
+                this.velocityX = 0;
+            }
+            if (e.key == "d") {
+                this.velocityX = 0;
+            }
+            if (e.key == "w") {
+                this.velocityY = 0;
+            }
+            if (e.key == "s") {
+                this.velocityY = 0;
             }
         });
     }
@@ -76,8 +90,6 @@ class Pacman {
         this.draw();
         this.x += this.velocityX;
         this.y += this.velocityY;
-        this.velocityX = 0;
-        this.velocityY = 0;
 
         if (this.x <= 0) {
             this.x = width;
