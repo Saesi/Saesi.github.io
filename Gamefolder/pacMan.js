@@ -56,7 +56,7 @@ class Pacman {
         if (this.velocityX > 0 && this.velocityY > 0) {
             this.lastDir = 5;
         }
-        if (this.velocityX > 0){
+        else if (this.velocityX > 0){
             ctx.arc(this.x, this.y, 10, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
             this.lastDir = 2;
         } else if (this.velocityX < 0){
