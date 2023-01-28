@@ -1,8 +1,8 @@
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const width = canvas.width = window.innerWidth;
+const height = canvas.height = window.innerHeight;
 
 
 
@@ -64,9 +64,10 @@ class Pacman {
             this.lastDir = 7;
         } else if (this.velocityX < 0 && this.velocityY < 0) {  //Vinstri Upp
             ctx.arc(this.x, this.y, 10, 1.5 * Math.PI, 3.1 * Math.PI); 
+            this.lastDir = 1;
         } else if (this.velocityX > 0){
             ctx.arc(this.x, this.y, 10, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
-            this.lastDir = 2;
+            this.lastDir = 4;
         } else if (this.velocityX < 0){
             ctx.arc(this.x, this.y, 10, 1.2 * Math.PI, 2.8 * Math.PI); //vinstri
             this.lastDir = 0;
@@ -75,20 +76,32 @@ class Pacman {
             this.lastDir = 2;
         } else if (this.velocityY > 0) {
             ctx.arc(this.x, this.y, 10, 0.7 * Math.PI, 2.3 * Math.PI);  //Niður
-            this.lastDir = 3;
+            this.lastDir = 6;
         } else {
             switch (this.lastDir) {
                 case 0:
                     ctx.arc(this.x, this.y, 10, 1.2 * Math.PI, 2.8 * Math.PI); //vinstri
                     break;
                 case 1:
-                    ctx.arc(this.x, this.y, 10, 1.7 * Math.PI, 3.3 * Math.PI);  //upp
+                    ctx.arc(this.x, this.y, 10, 1.5 * Math.PI, 3.1 * Math.PI);
                     break; 
                 case 2:
-                    ctx.arc(this.x, this.y, 10, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
+                    ctx.arc(this.x, this.y, 10, 1.7 * Math.PI, 3.3 * Math.PI);  //upp
                     break;
                 case 3:
+                    ctx.arc(this.x, this.y, 10, 2 * Math.PI, 3.6 * Math.PI);
+                    break;
+                case 4:
+                    ctx.arc(this.x, this.y, 10, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
+                    break;
+                case 5:
+                    ctx.arc(this.x, this.y, 10, 0.4 * Math.PI, 2.0 * Math.PI); //NiðurHægri
+                    break;
+                case 6:
                     ctx.arc(this.x, this.y, 10, 0.7 * Math.PI, 2.3 * Math.PI);  //Niður
+                    break;
+                case 7:
+                    ctx.arc(this.x, this.y, 10, 1 * Math.PI, 2.6 * Math.PI);
                     break;
             }
         }
@@ -117,13 +130,76 @@ class Pacman {
     }
 }
 
+class Ghost {
+    constructor(x, y, dx, dy, color = 'red') {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+        this.color = color
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.arc(this.x, this.y, 30, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+
+    update() {
+        if ((this.x + 30) >= width) {
+            this.dx = -(this.dx);
+        }
+
+        if ((this.x - 30) <= 0) {
+            this.dx = -(this.dx);
+        }
+
+        if ((this.y + 30) >= height) {
+            this.dy = -(this.dy);
+        }
+
+        if ((this.y - 30) <= 0) {
+            this.dy = -(this.dy);
+        }
+
+        this.x += this.dx;
+        this.y += this.dy;
+        this.draw();
+    }
+}
+
+
 let player = new Pacman(100, 100, {x: 3, y: 3});
+
+let ghost = new Ghost(200, 200, 3, 3, "blue");
+
+let touchY = 0;
+let touchX = 0;
+const touchThreshold = 30;
+
+window.addEventListener("touchstart", (e) => {
+    touchY = e.changedTouches[0].pageY;
+    touchX = e.changedTouches[0].pageX;
+});
+window.addEventListener("touchend", (e) => {
+    let distanceY = e.changedTouches[0].pageY - touchY;
+    let distanceX = e.changedTouches[0].pageX - touchX;
+    console.log(`X: ${distanceX} & Y: ${distanceY}`);
+    const angle = Math.atan2(e.changedTouches[0].pageY - touchY, e.changedTouches[0].pageX - touchX)
+    const velocity = {
+        x: Math.cos(angle) * 5,
+        y: Math.sin(angle) * 5
+    }
+    player.velocityX = velocity.x;
+    player.velocityY = velocity.y;
+});
 
 function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
     player.update();
-    draw_ghost(ctx, 500, 200, 50);
+    ghost.update();
 }
 animate();
 
