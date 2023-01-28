@@ -10,13 +10,13 @@ var dir = 1;
 function drawPacMan(posX, posY, direction) {    //Fall sem teiknar pacman
     ctx.beginPath();
     if (direction == 1){
-        ctx.arc(posX, posY, 5, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
+        ctx.arc(posX, posY, 10, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
     } else if (direction == 2){
-        ctx.arc(posX, posY, 5, 1.2 * Math.PI, 2.8 * Math.PI); //vinstri
+        ctx.arc(posX, posY, 10, 1.2 * Math.PI, 2.8 * Math.PI); //vinstri
     } else if (direction == 3){
-        ctx.arc(posX, posY, 5, 1.7 * Math.PI, 3.3 * Math.PI);  //upp
+        ctx.arc(posX, posY, 10, 1.7 * Math.PI, 3.3 * Math.PI);  //upp
     } else if (direction == 4) {
-        ctx.arc(posX, posY, 5, 0.7 * Math.PI, 2.3 * Math.PI);  //Niður
+        ctx.arc(posX, posY, 10, 0.7 * Math.PI, 2.3 * Math.PI);  //Niður
     }
     ctx.lineTo(posX, posY);
     ctx.fillStyle = "yellow";
