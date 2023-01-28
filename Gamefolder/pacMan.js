@@ -26,7 +26,7 @@ function drawPacMan(posX, posY, direction) {    //Fall sem teiknar pacman
 
 
 
-const mapO = [
+/*const mapO = [
     "11111111111111111111111",
     "10000000000100000000001",
     "10111011110101111011101",
@@ -52,11 +52,11 @@ const mapO = [
     "10111111110101111111101",
     "10000000000000000000001",
     "11111111111111111111111"
-];
+];*/
 
 
 //Map layout constructor
-function layoutMap(map) {
+/*function layoutMap(map) {
     var mpx = 700;
     var mpy = 200;
     ctx.fillStyle = "blue";
@@ -74,7 +74,7 @@ function layoutMap(map) {
         var mpx = 700;
         
     }
-}
+}*/
 
 //backupborder
 /*var borderLeftTop = 650;    //Hornin fyrir brautina
@@ -87,11 +87,10 @@ function drawArenaBorder(lT, rB) {
 }
 */
 
-layoutMap(mapO);
+
 function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
-    layoutMap(mapO);
     drawPacMan(posPacX, posPacY, dir);
     document.onkeydown = function(event) {
         switch (event.keyCode) {
