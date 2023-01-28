@@ -123,6 +123,7 @@ function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
     player.update();
+    draw_ghost(ctx, 500, 200, 50);
 }
 animate();
 
