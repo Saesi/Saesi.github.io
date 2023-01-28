@@ -96,7 +96,7 @@ class Pacman {
 
 
 
-let player = new Pacman(100, 100, {x: 5, y: 5} );
+let player = new Pacman(100, 100, {x: 5, y: 5});
 
 function animate() {    //Animation fallið
     requestAnimationFrame(animate);
