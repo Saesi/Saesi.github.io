@@ -94,12 +94,6 @@ class Pacman {
     }
 }
 
-
-
-<<<<<<< HEAD
-=======
-
-
 let player = new Pacman(100, 100, {x: 5, y: 5});
 
 function animate() {    //Animation fallið
@@ -115,7 +109,7 @@ animate();
 
 
 // code graveyard
->>>>>>> 59bd00adbe21b14f57bd57fd37343ee44787d255
+
 /*const mapO = [
     "11111111111111111111111",
     "10000000000100000000001",
@@ -177,11 +171,11 @@ function drawArenaBorder(lT, rB) {
 }
 */
 
-let player = new Pacman(500, 900, {x: 5, y: 5}, 0.98);
+/* let player = new Pacman(500, 900, {x: 5, y: 5}, 0.98);
 
 function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
     player.update();
 }
-animate();
+animate(); */
