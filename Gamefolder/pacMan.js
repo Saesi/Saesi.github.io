@@ -24,6 +24,74 @@ function drawPacMan(posX, posY, direction) {    //Fall sem teiknar pacman
 }
 
 
+class Pacman {
+    constructor(x, y, velocity) {
+        this.x = x;
+        this.y = y;
+        this.velocity = velocity;
+        this.velocityX = this.velocity.x;
+        this.velocityY = this.velocity.y;
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key == "a") {
+                this.velocityX = -this.velocity.x;
+            }
+            if (e.key == "d") {
+                this.velocityX = this.velocity.x;
+            }
+            if (e.key == "w") {
+                this.velocityY = -this.velocity.y;
+            }
+            if (e.key == "s") {
+                this.velocityY = this.velocity.y;
+            }
+        });
+    }
+
+    restart() {
+        this.x = width / 2;
+        this.y = height / 2;
+        this.velocityX = this.velocityY = 0;
+    }
+
+    draw = () => {
+        ctx.beginPath();
+        if (this.velocityX > 0){
+            ctx.arc(this.x, this.y, 10, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
+        } else if (this.velocityX < 0){
+            ctx.arc(this.x, this.y, 10, 1.2 * Math.PI, 2.8 * Math.PI); //vinstri
+        } else if (this.velocityY < 0){
+            ctx.arc(this.x, this.y, 10, 1.7 * Math.PI, 3.3 * Math.PI);  //upp
+        } else if (this.velocityY > 0) {
+            ctx.arc(this.x, this.y, 10, 0.7 * Math.PI, 2.3 * Math.PI);  //Niður
+        }
+        ctx.lineTo(this.x, this.y);
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+    }
+
+    update() {
+        this.draw();
+        this.x += this.velocityX;
+        this.y += this.velocityY;
+        this.velocityX = 0;
+        this.velocityY = 0;
+
+        if (this.x <= 0) {
+            this.x = width;
+        }
+        else if (this.x >= width) {
+            this.x = 0;
+        }
+        if (this.y <= 0) {
+            this.y = height;
+        }
+        else if (this.y >= height) {
+            this.y = 0;
+        }
+    }
+}
+
 
 
 /*const mapO = [
@@ -87,30 +155,11 @@ function drawArenaBorder(lT, rB) {
 }
 */
 
+let player = new Pacman(100, 100, {x: 5, y: 5}, 0.98);
 
 function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
-    drawPacMan(posPacX, posPacY, dir);
-    document.onkeydown = function(event) {
-        switch (event.keyCode) {
-        case 37:
-            posPacX -= 3;
-            dir = 2;
-        break;
-        case 38:
-            posPacY -= 3;
-            dir = 3;
-        break;
-        case 39:
-            posPacX += 3;
-            dir = 1;
-        break;
-        case 40:
-            posPacY += 3;
-            dir = 4;
-        break;
-        }
-    };
+    player.update();
 }
 animate();
