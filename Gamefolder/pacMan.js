@@ -94,6 +94,23 @@ class Pacman {
 
 
 
+
+
+let player = new Pacman(100, 100, {x: 5, y: 5} );
+
+function animate() {    //Animation fallið
+    requestAnimationFrame(animate);
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    player.update();
+}
+animate();
+
+
+
+
+
+
+// code graveyard
 /*const mapO = [
     "11111111111111111111111",
     "10000000000100000000001",
@@ -154,12 +171,3 @@ function drawArenaBorder(lT, rB) {
     ctx.clearRect(lT+5, 55, 489, rB-10);
 }
 */
-
-let player = new Pacman(100, 100, {x: 5, y: 5}, 0.98);
-
-function animate() {    //Animation fallið
-    requestAnimationFrame(animate);
-    ctx.clearRect(0,0,innerWidth,innerHeight);
-    player.update();
-}
-animate();
