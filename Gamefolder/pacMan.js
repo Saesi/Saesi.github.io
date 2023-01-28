@@ -54,9 +54,17 @@ class Pacman {
     draw = () => {
         ctx.beginPath();
         if (this.velocityX > 0 && this.velocityY > 0) {
+            ctx.arc(this.x, this.y, 10, 0.4 * Math.PI, 2.0 * Math.PI); //NiðurHægri
             this.lastDir = 5;
-        }
-        else if (this.velocityX > 0){
+        } else if (this.velocityX > 0 && this.velocityY < 0){ //HægriUpp
+            ctx.arc(this.x, this.y, 10, 2 * Math.PI, 3.6 * Math.PI);
+            this.lastDir = 3;
+        } else if (this.velocityX < 0 && this.velocityY > 0){   //Niður Vinstri
+            ctx.arc(this.x, this.y, 10, 1 * Math.PI, 2.6 * Math.PI);
+            this.lastDir = 7;
+        } else if (this.velocityX < 0 && this.velocityY < 0) {  //Vinstri Upp
+            ctx.arc(this.x, this.y, 10, 1.5 * Math.PI, 3.1 * Math.PI); 
+        } else if (this.velocityX > 0){
             ctx.arc(this.x, this.y, 10, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
             this.lastDir = 2;
         } else if (this.velocityX < 0){
@@ -109,7 +117,7 @@ class Pacman {
     }
 }
 
-let player = new Pacman(100, 100, {x: 5, y: 5});
+let player = new Pacman(100, 100, {x: 3, y: 3});
 
 function animate() {    //Animation fallið
     requestAnimationFrame(animate);
