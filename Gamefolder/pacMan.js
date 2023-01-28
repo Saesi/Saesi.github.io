@@ -4,24 +4,6 @@ let ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-var posPacX = 900;
-var posPacY = 500;
-var dir = 1;
-function drawPacMan(posX, posY, direction) {    //Fall sem teiknar pacman
-    ctx.beginPath();
-    if (direction == 1){
-        ctx.arc(posX, posY, 10, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
-    } else if (direction == 2){
-        ctx.arc(posX, posY, 10, 1.2 * Math.PI, 2.8 * Math.PI); //vinstri
-    } else if (direction == 3){
-        ctx.arc(posX, posY, 10, 1.7 * Math.PI, 3.3 * Math.PI);  //upp
-    } else if (direction == 4) {
-        ctx.arc(posX, posY, 10, 0.7 * Math.PI, 2.3 * Math.PI);  //Niður
-    }
-    ctx.lineTo(posX, posY);
-    ctx.fillStyle = "yellow";
-    ctx.fill();
-}
 
 
 class Pacman {
@@ -31,6 +13,7 @@ class Pacman {
         this.velocity = velocity;
         this.velocityX = this.velocity.x;
         this.velocityY = this.velocity.y;
+        this.lastDir = 0;
 
         window.addEventListener('keydown', (e) => {
             if (e.key == "a") {
@@ -58,12 +41,31 @@ class Pacman {
         ctx.beginPath();
         if (this.velocityX > 0){
             ctx.arc(this.x, this.y, 10, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
+            this.lastDir = 2;
         } else if (this.velocityX < 0){
             ctx.arc(this.x, this.y, 10, 1.2 * Math.PI, 2.8 * Math.PI); //vinstri
+            this.lastDir = 0;
         } else if (this.velocityY < 0){
             ctx.arc(this.x, this.y, 10, 1.7 * Math.PI, 3.3 * Math.PI);  //upp
+            this.lastDir = 1;
         } else if (this.velocityY > 0) {
             ctx.arc(this.x, this.y, 10, 0.7 * Math.PI, 2.3 * Math.PI);  //Niður
+            this.lastDir = 3;
+        } else {
+            switch (this.lastDir) {
+                case 0:
+                    ctx.arc(this.x, this.y, 10, 1.2 * Math.PI, 2.8 * Math.PI); //vinstri
+                    break;
+                case 1:
+                    ctx.arc(this.x, this.y, 10, 1.7 * Math.PI, 3.3 * Math.PI);  //upp
+                    break; 
+                case 2:
+                    ctx.arc(this.x, this.y, 10, 0.2 * Math.PI, 1.8 * Math.PI); //hægri
+                    break;
+                case 3:
+                    ctx.arc(this.x, this.y, 10, 0.7 * Math.PI, 2.3 * Math.PI);  //Niður
+                    break;
+            }
         }
         ctx.lineTo(this.x, this.y);
         ctx.fillStyle = "yellow";
@@ -94,23 +96,6 @@ class Pacman {
 
 
 
-
-
-let player = new Pacman(100, 100, {x: 5, y: 5} );
-
-function animate() {    //Animation fallið
-    requestAnimationFrame(animate);
-    ctx.clearRect(0,0,innerWidth,innerHeight);
-    player.update();
-}
-animate();
-
-
-
-
-
-
-// code graveyard
 /*const mapO = [
     "11111111111111111111111",
     "10000000000100000000001",
@@ -171,3 +156,12 @@ function drawArenaBorder(lT, rB) {
     ctx.clearRect(lT+5, 55, 489, rB-10);
 }
 */
+
+let player = new Pacman(500, 900, {x: 5, y: 5}, 0.98);
+
+function animate() {    //Animation fallið
+    requestAnimationFrame(animate);
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    player.update();
+}
+animate();
