@@ -174,6 +174,27 @@ let player = new Pacman(100, 100, {x: 3, y: 3});
 
 let ghost = new Ghost(200, 200, 3, 3, "blue");
 
+let touchY = 0;
+let touchX = 0;
+const touchThreshold = 30;
+
+window.addEventListener("touchstart", (e) => {
+    touchY = e.changedTouches[0].pageY;
+    touchX = e.changedTouches[0].pageX;
+});
+window.addEventListener("touchend", (e) => {
+    let distanceY = e.changedTouches[0].pageY - touchY;
+    let distanceX = e.changedTouches[0].pageX - touchX;
+    console.log(`X: ${distanceX} & Y: ${distanceY}`);
+    const angle = Math.atan2(e.changedTouches[0].pageY - touchY, e.changedTouches[0].pageX - touchX)
+    const velocity = {
+        x: Math.cos(angle) * 5,
+        y: Math.sin(angle) * 5
+    }
+    player.velocityX = velocity.x;
+    player.velocityY = velocity.y;
+});
+
 function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
