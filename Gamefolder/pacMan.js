@@ -175,9 +175,10 @@ class Ghost {
                 const py = this.y - ghost.y;
                 const distance = Math.sqrt(px * px + py * py);
 
-                if (distance < this.size + ball.size) {
-                    ball.color = randomRGB();
-                    this.color = randomRGB();
+                if (distance < 60) {
+                    console.log("Hit");
+                    this.dx = -(this.dx);
+                    this.dy = -(this.dy);
                 }
             }
         }
@@ -187,10 +188,10 @@ class Ghost {
 
 let player = new Pacman(100, 100, {x: 3, y: 3});
 
-let ghostO = new Ghost(500, 105, 3, 3, "blue");
-let ghostT = new Ghost(700, 300, 3, 3, "blue");
-let ghostTH = new Ghost(240, 100, 3, 3, "blue");
-let ghostF = new Ghost(789, 340, 3, 3, "blue");
+let ghostO = new Ghost(500, 105, 3, 3, "cyan");
+let ghostT = new Ghost(700, 300, 3, 3, "pink");
+let ghostTH = new Ghost(240, 100, 3, 3, "red");
+let ghostF = new Ghost(789, 340, 3, 3, "orange");
 
 const ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
 
