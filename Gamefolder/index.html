@@ -18,12 +18,20 @@
             }
             .counter {
                 color: blue;
+                text-align: right;
+            }
+            .row {
+                display: grid;
+                grid-template-areas: 
+                "living counter";
             }
         </style>
     </head>
     <body>
-        <p id="life" class="living"></p>
-        <p id="counter" class="counter"></p>
+        <section class="row">
+            <p id="life" class="living"></p>
+            <p id="counter" class="counter"></p>
+        </section>
         <canvas id="canvas"></canvas>
         <script src="pacMan.js"></script>
     </body>

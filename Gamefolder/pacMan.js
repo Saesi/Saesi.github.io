@@ -14,7 +14,8 @@ class Pacman {
         this.velocityX = 0;
         this.velocityY = 0;
         this.lastDir = 0;
-        this.life = life;
+        this.lf = life;
+        this.score = 0;
 
         window.addEventListener('keydown', (e) => {
             if (e.key == "a") {
@@ -128,9 +129,9 @@ class Pacman {
         else if (this.y >= height) {
             this.y = 0;
         }
-        
+        document.getElementById("life").innerHTML = this.lf;
+        document.getElementById("counter").innerHTML = this.score;
     }
-
 }
 
 class Ghost {
@@ -225,7 +226,6 @@ function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
     player.update();
-    document.getElementById("life").innerHTML = player.life;
     for (const ghost of ghosts){
         ghost.update();
         ghost.collisionDetect();
