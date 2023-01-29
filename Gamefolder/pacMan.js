@@ -7,13 +7,14 @@ const height = canvas.height = window.innerHeight;
 
 
 class Pacman {
-    constructor(x, y, velocity) {
+    constructor(x, y, velocity, life) {
         this.x = x;
         this.y = y;
         this.velocity = velocity;
         this.velocityX = 0;
         this.velocityY = 0;
         this.lastDir = 0;
+        this.life = life;
 
         window.addEventListener('keydown', (e) => {
             if (e.key == "a") {
@@ -127,7 +128,9 @@ class Pacman {
         else if (this.y >= height) {
             this.y = 0;
         }
+        
     }
+
 }
 
 class Ghost {
@@ -186,7 +189,7 @@ class Ghost {
 }
 
 
-let player = new Pacman(100, 100, {x: 3, y: 3});
+let player = new Pacman(100, 100, {x: 3, y: 3}, 3);
 
 let ghostO = new Ghost(500, 105, 3, 3, "cyan");
 let ghostT = new Ghost(700, 300, 3, 3, "pink");
@@ -222,6 +225,7 @@ function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
     player.update();
+    document.getElementById("life").innerHTML = player.life;
     for (const ghost of ghosts){
         ghost.update();
         ghost.collisionDetect();
