@@ -167,12 +167,32 @@ class Ghost {
         this.y += this.dy;
         this.draw();
     }
+
+    collisionDetect() {
+        for (const ghost of ghosts) {
+            if (!(this === ghost)) {
+                const px = this.x - ghost.x;
+                const py = this.y - ghost.y;
+                const distance = Math.sqrt(px * px + py * py);
+
+                if (distance < this.size + ball.size) {
+                    ball.color = randomRGB();
+                    this.color = randomRGB();
+                }
+            }
+        }
+    }
 }
 
 
 let player = new Pacman(100, 100, {x: 3, y: 3});
 
-let ghost = new Ghost(200, 200, 3, 3, "blue");
+let ghostO = new Ghost(500, 105, 3, 3, "blue");
+let ghostT = new Ghost(700, 300, 3, 3, "blue");
+let ghostTH = new Ghost(240, 100, 3, 3, "blue");
+let ghostF = new Ghost(789, 340, 3, 3, "blue");
+
+const ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
 
 let touchY = 0;
 let touchX = 0;
@@ -195,11 +215,16 @@ window.addEventListener("touchend", (e) => {
     player.velocityY = velocity.y;
 });
 
+
+
 function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
     player.update();
-    ghost.update();
+    for (const ghost of ghosts){
+        ghost.update();
+        ghost.collisionDetect();
+    }
 }
 animate();
 
