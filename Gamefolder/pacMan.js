@@ -4,7 +4,26 @@ let ctx = canvas.getContext('2d');
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
 
+class pellet{
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+        this.eaten = 0;
+    }
 
+    draw = () => {
+        ctx.beginPath();
+        ctx.fillStyle = "yellow";
+        ctx.arc(this.x, this.y, 10, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+
+    update () {
+        if (this.eaten == 0) {
+            this.draw();
+        }
+    }
+}
 
 class Pacman {
     constructor(x, y, velocity, life) {
@@ -129,8 +148,42 @@ class Pacman {
         else if (this.y >= height) {
             this.y = 0;
         }
-        document.getElementById("life").innerHTML = this.lf;
+        if (this.lf <= 0) {
+            document.getElementById("life").innerHTML = "Dead";
+        } else {
+            document.getElementById("life").innerHTML = this.lf;
+        }
         document.getElementById("counter").innerHTML = this.score;
+    }
+
+    ghostDetector() {
+        for (const ghost of ghosts) {
+            if (!(this === ghost)) {
+                const px = this.x - ghost.x;
+                const py = this.y - ghost.y;
+                const distance = Math.sqrt(px * px + py * py);
+
+                if (distance < 40) {
+                    this.lf -= 1;
+                }
+            }
+        }
+    }
+
+    pelletDetector() {
+        for (const pellet of pellets) {
+            if (!(this === pellet)) {
+                const px = this.x - pellet.x;
+                const py = this.y - pellet.y;
+                const distance = Math.sqrt(px * px + py * py);
+
+                if (distance < 40) {
+                    this.score += 1;
+                    pellet.eaten += 1;
+                    delete pellets[pos];
+                }
+            }
+        }
     }
 }
 
@@ -180,7 +233,7 @@ class Ghost {
                 const distance = Math.sqrt(px * px + py * py);
 
                 if (distance < 60) {
-                    console.log("Hit");
+                    //console.log("Hit");
                     this.dx = -(this.dx);
                     this.dy = -(this.dy);
                 }
@@ -192,12 +245,28 @@ class Ghost {
 
 let player = new Pacman(100, 100, {x: 3, y: 3}, 3);
 
-let ghostO = new Ghost(500, 105, 3, 3, "cyan");
-let ghostT = new Ghost(700, 300, 3, 3, "pink");
-let ghostTH = new Ghost(240, 100, 3, 3, "red");
-let ghostF = new Ghost(789, 340, 3, 3, "orange");
+let ghostO = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "cyan");
+let ghostT = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "pink");
+let ghostTH = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "red");
+let ghostF = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "orange");
 
 const ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
+
+let pelletO = new pellet(80, 1080);
+let pelletT = new pellet(500, 70);
+let pelletTH = new pellet(256, 9281);
+let pelletF = new pellet(857, 1100);
+let pelletFI = new pellet(1300, 791);
+let pelletS = new pellet(223, 110);
+let pelletSE = new pellet(7460, 746);
+let pelletEI = new pellet(874, 342);
+let pelletNI = new pellet(274, 70);
+let pelletTE = new pellet(868, 30);
+let pelleELE = new pellet(70, 70);
+let pelletTWE = new pellet(290, 333);
+
+const pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE]
+
 
 let touchY = 0;
 let touchX = 0;
@@ -226,9 +295,14 @@ function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
     player.update();
+    for (const pellet of pellets){
+        pellet.update();
+        player.pelletDetector();
+    }
     for (const ghost of ghosts){
         ghost.update();
         ghost.collisionDetect();
+        player.ghostDetector();
     }
 }
 animate();
