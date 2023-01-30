@@ -21,6 +21,8 @@ class pellet{
     update () {
         if (this.eaten == 0) {
             this.draw();
+        } else {
+            ctx.clearRect(this.x, this.y, 10, 10)
         }
     }
 }
@@ -171,18 +173,22 @@ class Pacman {
     }
 
     pelletDetector() {
-        for (const pellet of pellets) {
+        var pos = 0;
+        for (var pellet of pellets) {
             if (!(this === pellet)) {
                 const px = this.x - pellet.x;
                 const py = this.y - pellet.y;
                 const distance = Math.sqrt(px * px + py * py);
 
-                if (distance < 40) {
-                    this.score += 1;
+                
+                if (distance < 20) {
+                    this.score += 10;
                     pellet.eaten += 1;
                     delete pellets[pos];
+                    pellets = pellets.filter(elm => elm);
                 }
             }
+            pos += 1;
         }
     }
 }
@@ -265,7 +271,7 @@ let pelletTE = new pellet(868, 30);
 let pelleELE = new pellet(70, 70);
 let pelletTWE = new pellet(290, 333);
 
-const pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE]
+var pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE]
 
 
 let touchY = 0;
@@ -295,6 +301,7 @@ function animate() {    //Animation fallið
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
     player.update();
+    console.log(pellets);
     for (const pellet of pellets){
         pellet.update();
         player.pelletDetector();
