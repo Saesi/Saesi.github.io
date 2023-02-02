@@ -131,6 +131,47 @@ class Pacman {
         ctx.lineTo(this.x, this.y);
         ctx.fillStyle = "yellow";
         ctx.fill();
+        if (this.lastDir == 1) {
+            ctx.beginPath();
+            ctx.arc(this.x+3, this.y-4, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+        } else if (this.lastDir == 2) {
+            ctx.beginPath();
+            ctx.arc(this.x-5, this.y-3, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+        } else if (this.lastDir == 3) {
+            ctx.beginPath();
+            ctx.arc(this.x-2, this.y-5, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+        } else if (this.lastDir == 4) {
+            ctx.beginPath();
+            ctx.arc(this.x+1, this.y-4, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+        } else if (this.lastDir == 5) {
+            ctx.beginPath();
+            ctx.arc(this.x+1, this.y-4, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+        } else if (this.lastDir == 6) {
+            ctx.beginPath();
+            ctx.arc(this.x-5, this.y+2, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+        } else if (this.lastDir == 7) {
+            ctx.beginPath();
+            ctx.arc(this.x-5, this.y-4, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+        } else if (this.lastDir == 0) {
+            ctx.beginPath();
+            ctx.arc(this.x-1, this.y-5, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+        }
     }
 
     update() {
@@ -247,7 +288,7 @@ class Ghost {
         }
     }
 }
-
+  
 
 let player = new Pacman(100, 100, {x: 3, y: 3}, 3);
 
