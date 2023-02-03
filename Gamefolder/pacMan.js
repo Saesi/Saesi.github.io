@@ -27,6 +27,48 @@ class pellet{
     }
 }
 
+class wall{
+    constructor(x, y, sizeX, sizeY){
+        this.x = x;
+        this.y = y;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+    }
+
+    draw = () => {
+        ctx.beginPath();
+        ctx.fillStyle = "Blue";
+        ctx.rect(this.x, this.y, this.sizeX, this.sizeY);
+        ctx.fill();
+    }
+
+    ghostDetect() {
+        for (const ghost of ghosts){
+            if (!(this === ghost)) {
+                let nullX = this.x;
+                let maxX = this.x+this.sizeX;
+                let nullY = this.y;
+                let maxY = this.y+this.sizeY;
+                    
+                if ((ghost.x + 5) <= nullX && (ghost.y + 5) >= nullY && (ghost.y - 5) <= maxY) {
+                    ghost.dx = -(ghost.dx);
+                } 
+                /*if ((ghost.x - 5) >= maxX && (ghost.y + 5) >= nullY && (ghost.y - 5) <= maxY) {
+                    ghost.dx = -(ghost.dx);
+                }
+                if ((ghost.y + 5) <= nullY && (ghost.x + 5) >= nullX && (ghost.x - 5) <= maxX) {
+                    ghost.dy = -(ghost.dy);
+                }
+                /*if ((ghost.y - 5) >= maxY && (ghost.x - 5) >= nullX && (ghost.x + 5) <= maxX) {
+                    ghost.dy = -(ghost.dy);
+                } 
+                
+                }*/
+            }
+        }
+    }
+}
+
 class Pacman {
     constructor(x, y, velocity, life) {
         this.x = x;
@@ -312,7 +354,11 @@ let pelletTE = new pellet(868, 30);
 let pelleELE = new pellet(70, 70);
 let pelletTWE = new pellet(290, 333);
 
-var pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE]
+var pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE];
+
+let demiWall = new wall(500, 500, 1000, 50);
+
+var walls = [demiWall];
 
 
 let touchY = 0;
@@ -351,6 +397,10 @@ function animate() {    //Animation fallið
         ghost.update();
         ghost.collisionDetect();
         player.ghostDetector();
+    }
+    for (const wall of walls){
+        wall.draw();
+        wall.ghostDetect();
     }
 }
 animate();
