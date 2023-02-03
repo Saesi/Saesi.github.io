@@ -27,6 +27,29 @@ class pellet{
     }
 }
 
+class powerPellet{
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+        this.eaten = 0;
+    }
+
+    draw = () => {
+        ctx.beginPath();
+        ctx.fillStyle = "yellow";
+        ctx.arc(this.x, this.y, 10, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+
+    update () {
+        if (this.eaten == 0) {
+            this.draw();
+        } else {
+            ctx.clearRect(this.x, this.y, 10, 10)
+        }
+    }
+}
+
 class wall{
     constructor(x, y, sizeX, sizeY){
         this.x = x;
@@ -41,32 +64,6 @@ class wall{
         ctx.rect(this.x, this.y, this.sizeX, this.sizeY);
         ctx.fill();
     }
-
-    ghostDetect() {
-        for (const ghost of ghosts){
-            if (!(this === ghost)) {
-                let nullX = this.x;
-                let maxX = this.x+this.sizeX;
-                let nullY = this.y;
-                let maxY = this.y+this.sizeY;
-                    
-                if ((ghost.x + 5) <= nullX && (ghost.y + 5) >= nullY && (ghost.y - 5) <= maxY) {
-                    ghost.dx = -(ghost.dx);
-                } 
-                /*if ((ghost.x - 5) >= maxX && (ghost.y + 5) >= nullY && (ghost.y - 5) <= maxY) {
-                    ghost.dx = -(ghost.dx);
-                }
-                if ((ghost.y + 5) <= nullY && (ghost.x + 5) >= nullX && (ghost.x - 5) <= maxX) {
-                    ghost.dy = -(ghost.dy);
-                }
-                /*if ((ghost.y - 5) >= maxY && (ghost.x - 5) >= nullX && (ghost.x + 5) <= maxX) {
-                    ghost.dy = -(ghost.dy);
-                } 
-                
-                }*/
-            }
-        }
-    }
 }
 
 class Pacman {
@@ -79,6 +76,7 @@ class Pacman {
         this.lastDir = 0;
         this.lf = life;
         this.score = 0;
+        this.hasTakenDmg = false;
 
         window.addEventListener('keydown', (e) => {
             if (e.key == "a") {
@@ -248,8 +246,14 @@ class Pacman {
                 const py = this.y - ghost.y;
                 const distance = Math.sqrt(px * px + py * py);
 
-                if (distance < 40) {
-                    this.lf -= 1;
+                if (distance < 40){
+                    if (this.hasTakenDmg === false) {
+                        this.lf -=1;
+                        this.hasTakenDmg = true;
+                        setTimeout(() => {
+                            this.hasTakenDmg = false;
+                        }, 300);
+                    }
                 }
             }
         }
@@ -274,6 +278,7 @@ class Pacman {
             pos += 1;
         }
     }
+    
 }
 
 class Ghost {
@@ -356,10 +361,6 @@ let pelletTWE = new pellet(290, 333);
 
 var pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE];
 
-let demiWall = new wall(500, 500, 1000, 50);
-
-var walls = [demiWall];
-
 
 let touchY = 0;
 let touchX = 0;
@@ -398,10 +399,6 @@ function animate() {    //Animation fallið
         ghost.collisionDetect();
         player.ghostDetector();
     }
-    for (const wall of walls){
-        wall.draw();
-        wall.ghostDetect();
-    }
 }
 animate();
 
@@ -412,7 +409,44 @@ animate();
 
 // code-graveyard
 
-/*const mapO = [
+/*
+
+let demiWall = new wall(500, 500, 50, 500);
+
+var walls = [demiWall];
+
+wallDetect() {
+        for (const wall of walls){
+            if (!(this === wall)) {
+                let nullX = wall.x;
+                let maxX = wall.x+wall.sizeX;
+                let nullY = wall.y;
+                let maxY = wall.y+wall.sizeY;
+                    
+                if ((this.x + 10) >= nullX && (this.x + 10) <= maxX && (this.y + 10) >= nullY && (this.y - 10) <= maxY) {
+                    this.velocityX = 0;
+                }
+                else if ((this.x - 10) <= maxX && (this.y + 10) >= nullY && (this.y - 10) <= maxY) {
+                    this.velocityX -= this.velocityX;
+                }/*
+                if ((ghost.y + 5) <= nullY && (ghost.x + 5) >= nullX && (ghost.x - 5) <= maxX) {
+                    ghost.dy = -(ghost.dy);
+                }
+                /*if ((ghost.y - 5) >= maxY && (ghost.x - 5) >= nullX && (ghost.x + 5) <= maxX) {
+                    ghost.dy = -(ghost.dy);
+                } 
+                
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+const mapO = [
     "11111111111111111111111",
     "10000000000100000000001",
     "10111011110101111011101",
