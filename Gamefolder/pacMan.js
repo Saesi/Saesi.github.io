@@ -32,18 +32,24 @@ class powerPellet{
         this.x = x;
         this.y = y;
         this.eaten = 0;
+        this.size = 1;
     }
 
     draw = () => {
         ctx.beginPath();
         ctx.fillStyle = "yellow";
-        ctx.arc(this.x, this.y, 10, 0, 2 * Math.PI);
+        ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
         ctx.fill();
     }
 
     update () {
         if (this.eaten == 0) {
             this.draw();
+            if (this.size < 12){
+                this.size += 0.1;
+            } else {
+                this.size -= 11;
+            }
         } else {
             ctx.clearRect(this.x, this.y, 10, 10)
         }
@@ -361,6 +367,10 @@ let pelletTWE = new pellet(290, 333);
 
 var pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE];
 
+let pwrPell = new powerPellet(500, 500);
+
+var pwrPellets = [pwrPell];
+
 
 let touchY = 0;
 let touchX = 0;
@@ -398,6 +408,9 @@ function animate() {    //Animation fallið
         ghost.update();
         ghost.collisionDetect();
         player.ghostDetector();
+    }
+    for (const pwrPl of pwrPellets){
+        pwrPl.update();
     }
 }
 animate();
