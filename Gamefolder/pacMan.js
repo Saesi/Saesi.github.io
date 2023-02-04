@@ -284,7 +284,26 @@ class Pacman {
             pos += 1;
         }
     }
-    
+
+    pwrPelletDetector() {
+        var pos = 0;
+        for (var pwrPellet of pwrPellets) {
+            if (!(this === pwrPellet)) {
+                const px = this.x - pwrPellet.x;
+                const py = this.y - pwrPellet.y;
+                const distance = Math.sqrt(px * px + py * py);
+
+                
+                if (distance < 22) {
+                    this.score += 50;
+                    pellet.eaten += 1;
+                    delete pwrPellets[pos];
+                    pwrPellets = pwrPellets.filter(elm => elm);
+                }
+            }
+            pos += 1;
+        }
+    }
 }
 
 class Ghost {
@@ -411,6 +430,7 @@ function animate() {    //Animation fallið
     }
     for (const pwrPl of pwrPellets){
         pwrPl.update();
+        player.pwrPelletDetector();
     }
 }
 animate();
