@@ -241,9 +241,9 @@ class Pacman {
         if (this.lf <= 0) {
             document.getElementById("life").innerHTML = "Dead";
         } else {
-            document.getElementById("life").innerHTML = this.lf;
+            document.getElementById("life").innerHTML = "Life: " + this.lf;
         }
-        document.getElementById("counter").innerHTML = this.score;
+        document.getElementById("counter").innerHTML = "Stig: " + this.score;
     }
 
     ghostDetector() {
