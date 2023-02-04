@@ -83,6 +83,7 @@ class Pacman {
         this.lf = life;
         this.score = 0;
         this.hasTakenDmg = false;
+        this.hasPowerup = false;
 
         window.addEventListener('keydown', (e) => {
             if (e.key == "a") {
@@ -246,6 +247,7 @@ class Pacman {
     }
 
     ghostDetector() {
+        var pos = 0;
         for (const ghost of ghosts) {
             if (!(this === ghost)) {
                 const px = this.x - ghost.x;
@@ -253,15 +255,21 @@ class Pacman {
                 const distance = Math.sqrt(px * px + py * py);
 
                 if (distance < 40){
-                    if (this.hasTakenDmg === false) {
+                    if (this.hasTakenDmg === false && this.hasPowerup === false) {
                         this.lf -=1;
                         this.hasTakenDmg = true;
                         setTimeout(() => {
                             this.hasTakenDmg = false;
                         }, 300);
                     }
+                    if (this.hasPowerup === true && this.hasTakenDmg === false){
+                        this.score += 200;
+                        delete ghosts[pos];
+                        ghosts = ghosts.filter(elm => elm);
+                    }
                 }
             }
+            pos += 1;
         }
     }
 
@@ -295,6 +303,16 @@ class Pacman {
 
                 
                 if (distance < 22) {
+                    this.hasPowerup = true;
+                    for (var ghost of ghosts){
+                        ghost.color = "Blue";
+                    }
+                    setTimeout(() => {
+                        this.hasPowerup = false;
+                        for (var ghost of ghosts){
+                            ghost.color = ghost.OGColor;
+                        }
+                    }, 10000);
                     this.score += 50;
                     pellet.eaten += 1;
                     delete pwrPellets[pos];
@@ -312,7 +330,8 @@ class Ghost {
         this.y = y;
         this.dx = dx;
         this.dy = dy;
-        this.color = color
+        this.color = color;
+        this.OGColor = color;
     }
 
     draw() {
@@ -369,7 +388,7 @@ let ghostT = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math
 let ghostTH = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "red");
 let ghostF = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "orange");
 
-const ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
+var ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
 
 let pelletO = new pellet(80, 1080);
 let pelletT = new pellet(500, 70);
