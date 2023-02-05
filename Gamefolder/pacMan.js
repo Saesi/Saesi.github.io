@@ -391,25 +391,25 @@ function toggleFullScreen() {
 
 let player = new Pacman(100, 100, {x: 3, y: 3}, 3);
 
-let ghostO = new Ghost(Math.floor((Math.random() * 1500) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "cyan");
-let ghostT = new Ghost(Math.floor((Math.random() * 1500) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "pink");
-let ghostTH = new Ghost(Math.floor((Math.random() * 1500) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "red");
-let ghostF = new Ghost(Math.floor((Math.random() * 1500) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "orange");
+let ghostO = new Ghost(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10), 1, 1, "cyan");
+let ghostT = new Ghost(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10), 1, 1, "pink");
+let ghostTH = new Ghost(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10), 1, 1, "red");
+let ghostF = new Ghost(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10), 1, 1, "orange");
 
 var ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
 
-let pelletO = new pellet(80, 700);
-let pelletT = new pellet(500, 70);
-let pelletTH = new pellet(256, 381);
-let pelletF = new pellet(387, 500);
-let pelletFI = new pellet(100, 791);
-let pelletS = new pellet(223, 110);
-let pelletSE = new pellet(600, 746);
-let pelletEI = new pellet(874, 342);
-let pelletNI = new pellet(274, 70);
-let pelletTE = new pellet(868, 30);
-let pelleELE = new pellet(70, 70);
-let pelletTWE = new pellet(290, 333);
+let pelletO = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletT = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletTH = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletF = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletFI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletS = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletSE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletEI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletNI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletTE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelleELE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletTWE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
 
 var pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE];
 
