@@ -420,6 +420,7 @@ let pwrPellF = new powerPellet(12, height-12);
 
 var pwrPellets = [pwrPellO, pwrPellTW, pwrPellTh, pwrPellF];
 
+var victory = false;
 
 let touchY = 0;
 let touchX = 0;
@@ -446,8 +447,45 @@ window.addEventListener("touchend", (e) =>{
     player.velocityY = 0;
 });
 
-var victory = false;
-var doAgain = true;
+
+
+function startingScreen() {
+    let startButton = document.createElement("button");
+    startButton.innerHTML = "Start Game";
+    startButton.id = "button"
+    document.body.appendChild(startButton);
+
+    startButton.addEventListener("click", function () {
+        startButton.style.display = "none";
+        restartGame();
+    })
+}
+
+function restartGame() {
+    player.restart();
+    pwrPellets = [pwrPellO, pwrPellTW, pwrPellTh, pwrPellF];
+    pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE];
+    ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
+    player.score = 0;
+    player.lf = 3;
+    victory = false;
+
+    animate();
+}
+
+function endScreen() {
+    let endButton = document.createElement("button");
+    endButton.innerHTML = "Start Game";
+    endButton.id = "button"
+    document.body.appendChild(endButton);
+
+    startButton.addEventListener("click", function () {
+        startButton.style.display = "none";
+        restartGame();
+    })
+}
+
+
 function animate() {    //Animation fallið
     if (victory === false){
         screen.orientation.lock("landscape-primary");
@@ -479,16 +517,18 @@ function animate() {    //Animation fallið
             document.getElementById("vicScreen").innerHTML = "VICTORY";
             document.getElementById("showscore").innerHTML = "Score: " + player.score;
             localStorage.setItem('Score', player.score);
+            endScreen();
         }
         if (player.lf <= 0){
             victory = true;
             document.getElementById("vicScreen").innerHTML = "Defeat";
             document.getElementById("showscore").innerHTML = "Score: " + player.score;
+            endScreen();
         }
     }
 }
-animate();
-
+//animate();
+startingScreen();
 
 
 // code-graveyard
