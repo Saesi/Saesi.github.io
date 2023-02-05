@@ -20,16 +20,21 @@
                 color: blue;
                 text-align: right;
             }
+            .instruction{
+                color: blue;
+                text-align: center;
+            }
             .row {
                 display: grid;
                 grid-template-areas: 
-                "living counter";
+                "living instruction counter";
             }
         </style>
     </head>
     <body>
         <section class="row">
             <p id="life" class="living"></p>
+            <p class="instruction">Ýttu á ENTER til þess að skipta á milli fullscreen og smallscreen</p>
             <p id="counter" class="counter"></p>
         </section>
         <canvas id="canvas"></canvas>

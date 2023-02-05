@@ -379,7 +379,14 @@ class Ghost {
         }
     }
 }
-  
+
+function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+}
 
 let player = new Pacman(100, 100, {x: 3, y: 3}, 3);
 
@@ -405,9 +412,12 @@ let pelletTWE = new pellet(290, 333);
 
 var pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE];
 
-let pwrPell = new powerPellet(500, 500);
+let pwrPellO = new powerPellet(12, 12);
+let pwrPellTW = new powerPellet(width-12, 12);
+let pwrPellTh = new powerPellet(width-12, height-12);
+let pwrPellF = new powerPellet(12, height-12);
 
-var pwrPellets = [pwrPell];
+var pwrPellets = [pwrPellO, pwrPellTW, pwrPellTh, pwrPellF];
 
 
 let touchY = 0;
@@ -433,7 +443,12 @@ window.addEventListener("touchend", (e) => {
 
 
 
-function animate() {    //Animation fallið
+function animate() {    //Animation fallið°
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          toggleFullScreen();
+        }
+    }, false);
     requestAnimationFrame(animate);
     ctx.clearRect(0,0,innerWidth,innerHeight);
     player.update();
