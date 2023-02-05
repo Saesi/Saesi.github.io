@@ -447,8 +447,8 @@ var victory = false;
 var doAgain = true;
 function animate() {    //Animation fallið
     if (victory === false){
-        /*screen.orientation.lock("landscape-primary");
-        document.addEventListener("keydown", (e) => {
+        screen.orientation.lock("landscape-primary");
+        /*document.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
             toggleFullScreen();
             }
