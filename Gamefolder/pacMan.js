@@ -475,6 +475,7 @@ function animate() {    //Animation fallið
             victory = true;
             document.getElementById("vicScreen").innerHTML = "VICTORY";
             document.getElementById("rest").innerHTML = "Restart? Press: Spacebar";
+            localStorage.setItem('Score', player.score);
         }
         if (player.lf <= 0){
             victory = true;
