@@ -255,7 +255,7 @@ class Pacman {
                 const distance = Math.sqrt(px * px + py * py);
 
                 if (distance < 40){
-                    navigator.vibrate(200);
+                    navigator.vibrate(2000);
                     if (this.hasTakenDmg === false && this.hasPowerup === false) {
                         this.lf -=1;
                         this.hasTakenDmg = true;
