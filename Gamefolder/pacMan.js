@@ -1,8 +1,8 @@
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 
-const width = canvas.width = window.innerWidth;
-const height = canvas.height = window.innerHeight;
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
 
 class pellet{
     constructor(x, y){
@@ -448,6 +448,8 @@ var victory = false;
 var doAgain = true;
 function animate() {    //Animation fallið
     if (victory === false){
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
         screen.orientation.lock("landscape-primary");
         /*document.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
