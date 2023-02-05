@@ -391,10 +391,10 @@ function toggleFullScreen() {
 
 let player = new Pacman(100, 100, {x: 3, y: 3}, 3);
 
-let ghostO = new Ghost(Math.floor((Math.random() * 2000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "cyan");
-let ghostT = new Ghost(Math.floor((Math.random() * 2000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "pink");
-let ghostTH = new Ghost(Math.floor((Math.random() * 2000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "red");
-let ghostF = new Ghost(Math.floor((Math.random() * 2000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "orange");
+let ghostO = new Ghost(Math.floor((Math.random() * 1500) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "cyan");
+let ghostT = new Ghost(Math.floor((Math.random() * 1500) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "pink");
+let ghostTH = new Ghost(Math.floor((Math.random() * 1500) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "red");
+let ghostF = new Ghost(Math.floor((Math.random() * 1500) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "orange");
 
 var ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
 
