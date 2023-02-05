@@ -450,7 +450,6 @@ window.addEventListener("touchend", (e) =>{
 
 
 function startingScreen() {
-    document.documentElement.requestFullscreen();
     let startButton = document.createElement("button");
     startButton.innerHTML = "Start Game";
     startButton.id = "button"
