@@ -255,6 +255,7 @@ class Pacman {
                 const distance = Math.sqrt(px * px + py * py);
 
                 if (distance < 40){
+                    navigator.vibrate(200);
                     if (this.hasTakenDmg === false && this.hasPowerup === false) {
                         this.lf -=1;
                         this.hasTakenDmg = true;
@@ -390,10 +391,10 @@ function toggleFullScreen() {
 
 let player = new Pacman(100, 100, {x: 3, y: 3}, 3);
 
-let ghostO = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "cyan");
-let ghostT = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "pink");
-let ghostTH = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "red");
-let ghostF = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "orange");
+let ghostO = new Ghost(Math.floor((Math.random() * 2000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "cyan");
+let ghostT = new Ghost(Math.floor((Math.random() * 2000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "pink");
+let ghostTH = new Ghost(Math.floor((Math.random() * 2000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "red");
+let ghostF = new Ghost(Math.floor((Math.random() * 2000) + 10), Math.floor((Math.random() * 700) + 10), 1, 1, "orange");
 
 var ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
 
@@ -446,11 +447,13 @@ var victory = false;
 var doAgain = true;
 function animate() {    //Animation fallið
     if (victory === false){
+        /*screen.orientation.lock("landscape-primary");
         document.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
             toggleFullScreen();
             }
-        }, false);
+        }, false);*/
+        document.documentElement.requestFullscreen();
         requestAnimationFrame(animate);
         ctx.clearRect(0,0,innerWidth,innerHeight);
         player.update();
@@ -473,7 +476,11 @@ function animate() {    //Animation fallið
             document.getElementById("vicScreen").innerHTML = "VICTORY";
             document.getElementById("rest").innerHTML = "Restart? Press: Spacebar";
         }
-        console.log(victory);
+        if (player.lf <= 0){
+            victory = true;
+            document.getElementById("vicScreen").innerHTML = "Defeat";
+            document.getElementById("rest").innerHTML = "Restart? Press: Spacebar";
+        }
     } 
 }
 animate();
