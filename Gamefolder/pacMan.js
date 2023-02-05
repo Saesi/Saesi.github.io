@@ -450,6 +450,7 @@ window.addEventListener("touchend", (e) =>{
 
 
 function startingScreen() {
+    document.documentElement.requestFullscreen();
     let startButton = document.createElement("button");
     startButton.innerHTML = "Start Game";
     startButton.id = "button"
@@ -517,7 +518,7 @@ function animate() {    //Animation fallið
             toggleFullScreen();
             }
         }, false);*/
-        document.documentElement.requestFullscreen();
+        //document.documentElement.requestFullscreen();
         animationid = requestAnimationFrame(animate);
         ctx.clearRect(0,0,innerWidth,innerHeight);
         player.update();
