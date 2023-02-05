@@ -447,6 +447,7 @@ window.addEventListener("touchend", (e) => {
 var victory = false;
 var doAgain = true;
 function animate() {    //Animation fallið
+    window.scrollTo(0, 1);
     if (victory === false){
         screen.orientation.lock("landscape-primary");
         /*document.addEventListener("keydown", (e) => {
