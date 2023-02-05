@@ -429,7 +429,7 @@ window.addEventListener("touchstart", (e) => {
     touchY = e.changedTouches[0].pageY;
     touchX = e.changedTouches[0].pageX;
 });
-window.addEventListener("touchend", (e) => {
+window.addEventListener("touchmove", (e) => {
     //let distanceY = e.changedTouches[0].pageY - touchY;
     //let distanceX = e.changedTouches[0].pageX - touchX;
     //console.log(`X: ${distanceX} & Y: ${distanceY}`);
@@ -441,7 +441,10 @@ window.addEventListener("touchend", (e) => {
     player.velocityX = velocity.x;
     player.velocityY = velocity.y;
 });
-
+window.addEventListener("touchend", (e) =>{
+    player.velocityX = 0;
+    player.velocityY = 0;
+});
 
 var victory = false;
 var doAgain = true;
