@@ -31,7 +31,8 @@
             .row {
                 display: grid;
                 grid-template-areas: 
-                "living instruction counter";
+                "living instruction counter"
+                "canvas";
                 margin: 0;
             }
             .canvas {
@@ -45,8 +46,8 @@
             <p id="life" class="living"></p>
             <p class="instruction">Ýttu á ENTER til þess að skipta á milli fullscreen og smallscreen</p>
             <p id="counter" class="counter"></p>
+            <canvas id="canvas" class="canvas" width="100%" height="100%"></canvas>
         </section>
-        <canvas id="canvas" class="canvas"></canvas>
         <script src="pacMan.js"></script>
         <p id="showscore" class="canvas"></p>
         <p id="vicScreen" class="canvas"></p>
