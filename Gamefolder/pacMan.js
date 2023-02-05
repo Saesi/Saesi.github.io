@@ -480,6 +480,11 @@ function restartGame() {
     let pwrPellTh = new powerPellet(width-12, height-12);
     let pwrPellF = new powerPellet(12, height-12);
 
+    let ghostO = new Ghost(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10), 1, 1, "cyan");
+    let ghostT = new Ghost(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10), 1, 1, "pink");
+    let ghostTH = new Ghost(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10), 1, 1, "red");
+    let ghostF = new Ghost(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10), 1, 1, "orange");
+
     player = new Pacman(100, 100, {x: 3, y: 3}, 3);
     pwrPellets = [pwrPellO, pwrPellTW, pwrPellTh, pwrPellF];
     pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE];
@@ -547,7 +552,6 @@ function animate() {    //Animation fallið
         }
     }
 }
-//animate();
 startingScreen();
 
 
