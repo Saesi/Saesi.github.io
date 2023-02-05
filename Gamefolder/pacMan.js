@@ -518,7 +518,7 @@ function animate() {    //Animation fallið
             toggleFullScreen();
             }
         }, false);*/
-        //document.documentElement.requestFullscreen();
+        document.documentElement.requestFullscreen();
         animationid = requestAnimationFrame(animate);
         ctx.clearRect(0,0,innerWidth,innerHeight);
         player.update();
