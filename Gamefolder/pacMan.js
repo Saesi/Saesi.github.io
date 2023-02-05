@@ -397,13 +397,13 @@ let ghostF = new Ghost(Math.floor((Math.random() * 1000) + 10), Math.floor((Math
 
 var ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
 
-let pelletO = new pellet(80, 1080);
+let pelletO = new pellet(80, 700);
 let pelletT = new pellet(500, 70);
-let pelletTH = new pellet(256, 9281);
-let pelletF = new pellet(857, 1100);
-let pelletFI = new pellet(1300, 791);
+let pelletTH = new pellet(256, 381);
+let pelletF = new pellet(387, 500);
+let pelletFI = new pellet(100, 791);
 let pelletS = new pellet(223, 110);
-let pelletSE = new pellet(7460, 746);
+let pelletSE = new pellet(600, 746);
 let pelletEI = new pellet(874, 342);
 let pelletNI = new pellet(274, 70);
 let pelletTE = new pellet(868, 30);
@@ -442,35 +442,41 @@ window.addEventListener("touchend", (e) => {
 });
 
 
-
-function animate() {    //Animation fallið°
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          toggleFullScreen();
+var victory = false;
+var doAgain = true;
+function animate() {    //Animation fallið
+    if (victory === false){
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+            toggleFullScreen();
+            }
+        }, false);
+        requestAnimationFrame(animate);
+        ctx.clearRect(0,0,innerWidth,innerHeight);
+        player.update();
+        console.log(pellets);
+        for (const pellet of pellets){
+            pellet.update();
+            player.pelletDetector();
         }
-    }, false);
-    requestAnimationFrame(animate);
-    ctx.clearRect(0,0,innerWidth,innerHeight);
-    player.update();
-    console.log(pellets);
-    for (const pellet of pellets){
-        pellet.update();
-        player.pelletDetector();
-    }
-    for (const ghost of ghosts){
-        ghost.update();
-        ghost.collisionDetect();
-        player.ghostDetector();
-    }
-    for (const pwrPl of pwrPellets){
-        pwrPl.update();
-        player.pwrPelletDetector();
-    }
+        for (const ghost of ghosts){
+            ghost.update();
+            ghost.collisionDetect();
+            player.ghostDetector();
+        }
+        for (const pwrPl of pwrPellets){
+            pwrPl.update();
+            player.pwrPelletDetector();
+        }
+        if (pellets.length === 0 && pwrPellets.length === 0){
+            victory = true;
+            document.getElementById("vicScreen").innerHTML = "VICTORY";
+            document.getElementById("rest").innerHTML = "Restart? Press: Spacebar";
+        }
+        console.log(victory);
+    } 
 }
 animate();
-
-
-
 
 
 
