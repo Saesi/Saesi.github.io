@@ -462,22 +462,38 @@ function startingScreen() {
 }
 
 function restartGame() {
-    player.restart();
+    let pelletO = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelletT = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelletTH = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelletF = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelletFI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelletS = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelletSE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelletEI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelletNI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelletTE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelleELE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    let pelletTWE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+    
+    let pwrPellO = new powerPellet(12, 12);
+    let pwrPellTW = new powerPellet(width-12, 12);
+    let pwrPellTh = new powerPellet(width-12, height-12);
+    let pwrPellF = new powerPellet(12, height-12);
+
+    player = new Pacman(100, 100, {x: 3, y: 3}, 3);
     pwrPellets = [pwrPellO, pwrPellTW, pwrPellTh, pwrPellF];
     pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE];
     ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
-    player.score = 0;
-    player.lf = 3;
     victory = false;
 
     animate();
 }
 
 function endScreen() {
-    let endButton = document.createElement("button");
-    endButton.innerHTML = "Start Game";
-    endButton.id = "button"
-    document.body.appendChild(endButton);
+    let startButton = document.createElement("button");
+    startButton.innerHTML = "Start Game";
+    startButton.id = "button"
+    document.body.appendChild(startButton);
 
     startButton.addEventListener("click", function () {
         startButton.style.display = "none";
@@ -488,6 +504,8 @@ function endScreen() {
 
 function animate() {    //Animation fallið
     if (victory === false){
+        document.getElementById("vicScreen").innerHTML = "";
+        document.getElementById("showscore").innerHTML = "";
         screen.orientation.lock("landscape-primary");
         /*document.addEventListener("keydown", (e) => {
             if (e.key === "Enter") {
@@ -495,7 +513,7 @@ function animate() {    //Animation fallið
             }
         }, false);*/
         document.documentElement.requestFullscreen();
-        requestAnimationFrame(animate);
+        animationid = requestAnimationFrame(animate);
         ctx.clearRect(0,0,innerWidth,innerHeight);
         player.update();
         console.log(pellets);
@@ -513,16 +531,18 @@ function animate() {    //Animation fallið
             player.pwrPelletDetector();
         }
         if (pellets.length === 0 && pwrPellets.length === 0){
-            victory = true;
             document.getElementById("vicScreen").innerHTML = "VICTORY";
             document.getElementById("showscore").innerHTML = "Score: " + player.score;
             localStorage.setItem('Score', player.score);
+            victory = true;
+            cancelAnimationFrame(animationid);
             endScreen();
         }
         if (player.lf <= 0){
-            victory = true;
             document.getElementById("vicScreen").innerHTML = "Defeat";
             document.getElementById("showscore").innerHTML = "Score: " + player.score;
+            victory = true;
+            cancelAnimationFrame(animationid);
             endScreen();
         }
     }
