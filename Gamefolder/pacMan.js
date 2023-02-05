@@ -430,9 +430,9 @@ window.addEventListener("touchstart", (e) => {
     touchX = e.changedTouches[0].pageX;
 });
 window.addEventListener("touchend", (e) => {
-    let distanceY = e.changedTouches[0].pageY - touchY;
-    let distanceX = e.changedTouches[0].pageX - touchX;
-    console.log(`X: ${distanceX} & Y: ${distanceY}`);
+    //let distanceY = e.changedTouches[0].pageY - touchY;
+    //let distanceX = e.changedTouches[0].pageX - touchX;
+    //console.log(`X: ${distanceX} & Y: ${distanceY}`);
     const angle = Math.atan2(e.changedTouches[0].pageY - touchY, e.changedTouches[0].pageX - touchX)
     const velocity = {
         x: Math.cos(angle) * 5,
