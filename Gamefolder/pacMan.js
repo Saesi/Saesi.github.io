@@ -475,13 +475,13 @@ function animate() {    //Animation fallið
         if (pellets.length === 0 && pwrPellets.length === 0){
             victory = true;
             document.getElementById("vicScreen").innerHTML = "VICTORY";
-            document.getElementById("rest").innerHTML = "Restart? Press: Spacebar";
+            document.getElementById("showscore").innerHTML = "Score: " + player.score;
             localStorage.setItem('Score', player.score);
         }
         if (player.lf <= 0){
             victory = true;
             document.getElementById("vicScreen").innerHTML = "Defeat";
-            document.getElementById("rest").innerHTML = "Restart? Press: Spacebar";
+            document.getElementById("showscore").innerHTML = "Score: " + player.score;
         }
     }
 }
