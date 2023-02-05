@@ -456,7 +456,7 @@ function animate() {    //Animation fallið
         }, false);*/
         document.documentElement.requestFullscreen();
         requestAnimationFrame(animate);
-        ctx.clearRect(0,0,width,height);
+        ctx.clearRect(0,0,innerWidth,innerHeight);
         player.update();
         console.log(pellets);
         for (const pellet of pellets){
