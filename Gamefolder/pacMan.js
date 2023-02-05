@@ -261,7 +261,7 @@ class Pacman {
                         this.hasTakenDmg = true;
                         setTimeout(() => {
                             this.hasTakenDmg = false;
-                        }, 300);
+                        }, 3000);
                     }
                     if (this.hasPowerup === true && this.hasTakenDmg === false){
                         this.score += 200;
@@ -398,18 +398,18 @@ let ghostF = new Ghost(Math.floor((Math.random() * width) + 10), Math.floor((Mat
 
 var ghosts = [ghostO, ghostT, ghostTH, ghostTH, ghostF];
 
-let pelletO = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelletT = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelletTH = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelletF = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelletFI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelletS = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelletSE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelletEI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelletNI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelletTE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelleELE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
-let pelletTWE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height) + 10));
+let pelletO = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelletT = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelletTH = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelletF = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelletFI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelletS = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelletSE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelletEI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelletNI = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelletTE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelleELE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
+let pelletTWE = new pellet(Math.floor((Math.random() * width) + 10), Math.floor((Math.random() * height)));
 
 var pellets = [pelletO, pelletT, pelletTH, pelletF, pelletFI, pelletS, pelletSE, pelletEI, pelletNI, pelletTE, pelleELE, pelletTWE];
 
@@ -440,6 +440,7 @@ window.addEventListener("touchend", (e) => {
     }
     player.velocityX = velocity.x;
     player.velocityY = velocity.y;
+    
 });
 
 
@@ -482,7 +483,7 @@ function animate() {    //Animation fallið
             document.getElementById("vicScreen").innerHTML = "Defeat";
             document.getElementById("rest").innerHTML = "Restart? Press: Spacebar";
         }
-    } 
+    }
 }
 animate();
 
